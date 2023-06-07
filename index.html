@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product API</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <button id="all" onclick="p('https://fakestoreapi.com/products/')">ALL</button>
+    <button id="Jwelary" onclick="p('https://fakestoreapi.com/products/category/jewelery')">Jwelary</button>
+    <button id="cloths" onclick="p('https://fakestoreapi.com/products/category/electronics')">Electronics</button>
+    <button id="Jwelary" onclick="p('https://fakestoreapi.com/products/category/womensclothing')">Men's Cloths</button>
+    <button id="Jwelary">Woman's Cloths</button>
+    <div class="items">
+     <img src="" alt="" id="img" height="100px" width="100px">
+        <p id="name"></p>
+    </div>
+    <div id="product">
+        
+    </div>
+    
+</body>
+<script>
+    const name = document.getElementById('name');
+    const img = document.getElementById('img');
+    const items = document.getElementById('items');
+    const product = document.getElementById('product');
+    // // url = 'https://fakestoreapi.com/products/';
+    // jwelurl = 'https://fakestoreapi.com/products/category/jewelery';
+    // // mclothurl = 'https://fakestoreapi.com/products/category/men'sclothing'
+    // wclothurl = 'https://fakestoreapi.com/products/category/"womensclothing"';
+    // electronicurl = 'https://fakestoreapi.com/products/category/electronics'
+    // const jewelery = document.getElementById('Jwelary')
+    
+    
+    function p(url)
+    {
+    fetch(url)
+    .then((res) => 
+    {
+        return res.json()
+    })
+    .then(async (data)=> {
+        console.log(data);
+        let iteme1 = "";
+        let iteme2 = "";
+        let products = "";
+        for(item in data){
+            console.log(data[item].title)
+            
+            iteme1 += data[item].title;
+            // iteme2 += data[item].image;
+            iteme2 += await `
+                            <img src="${data[item].image}" alt="products" height="100px" width="100px">
+                            <h1>${data[item].category}</h1>
+                            <h2>${data[item].price}</h2>
+                            <p >${data[item].title}</p>
+                            `
+        }
+        name.innerHTML = iteme2;
+    })
+    
+    }
+
+    p('https://fakestoreapi.com/products/');
+</script>
+</html>
